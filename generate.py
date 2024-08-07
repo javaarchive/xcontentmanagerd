@@ -43,6 +43,13 @@ with open(base_caddyfile_path, "r") as f:
         f.write(caddyfile_contents)
     print("Wrote Caddyfile...")
 
+with open("dnschef.ini", "w") as f:
+    f.write('''
+# redirect domain to us
+[A]
+{DOMAIN}={host}
+''')
+
 print("Wrote configs...")    
 if HAS_LIMITED_INTERNET and not os.getenv("SKIP_DNS_UPDATE", False):
     # use cloudflare dns to update dns records
