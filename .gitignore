@@ -4,3 +4,5 @@ Caddyfile
 !base/Caddyfile
 dnschef.py
 dnschef.ini
+caddy.exe
+*.exe
