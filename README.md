@@ -13,3 +13,6 @@ your average jellyfin server, runs on port 8096. proxied by caddy cause why not 
 
 ### python3 http.server???
 to host downloads when friends are using it.
+
+## running scripts through git bash
+`bash <filename>`
