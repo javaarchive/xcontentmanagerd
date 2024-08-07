@@ -1,1 +1,1 @@
-python3 generate.py 192.168.5.1
+.\caddy.exe run --config Caddyfile --adapter caddyfile
