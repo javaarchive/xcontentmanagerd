@@ -2,7 +2,7 @@
 low power content server details for long trips with limited internet, it's like those airplane menus but cooler
 
 ## details
-cheap laptop runs windows 10, runs some wifi hotspot software. it has scoop installed and git sh so we have these cursed shell scripts on windowss.
+cheap laptop runs windows 10, runs some wifi hotspot software. it has scoop installed and git bash so we have these cursed shell scripts on windows. you will also need a working python install with pip.
 
 ## services
 ### caddy

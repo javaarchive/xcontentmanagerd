@@ -12,15 +12,19 @@ if os.getenv("HAS_LIMITED_INTERNET", None):
 CF_API_KEY = os.getenv("CF_API_KEY", None)
 CF_ZONE_ID = os.getenv("CF_ZONE_ID", None)
 CF_DNS_ID = os.getenv("CF_DNS_ID", None)
+DOMAIN = os.getenv("DOMAIN", "intra.smashcloud.org")
 if len(sys.argv) < 2:
     print("Usage: python3 generate.py <ip on network interface to use>")
     sys.exit(1)
 
 host = sys.argv[1]
 
-with open("base/Caddyfile", "r") as f:
+# base/Caddyfile only worked on linux dev machine
+base_caddyfile_path = os.path.join(os.getcwd(), "base", "Caddyfile") # TODO: make this work in other cwds?
+
+with open(base_caddyfile_path, "r") as f:
     caddyfile_contents = f.read()
-    caddyfile_contents = caddyfile_contents.replace("myip", host)
+    caddyfile_contents = caddyfile_contents.replace("myip", host).replace("$domain", DOMAIN)
     if CF_API_KEY:
         caddyfile_contents = caddyfile_contents.replace("$cf_api_key", CF_API_KEY)
     if HAS_LIMITED_INTERNET:
@@ -55,14 +59,14 @@ if HAS_LIMITED_INTERNET and not os.getenv("SKIP_DNS_UPDATE", False):
             print("Got existing dns records count:", len(records))
             dns_id = CF_DNS_ID
             for record in records:
-                if record["name"] == "intra.smashcloud.org":
+                if record["name"] == DOMAIN:
                     dns_id = record["id"]
                     print("Found existing dns record with id", dns_id, " ignoring env var...", CF_DNS_ID)
                     break
             response = requests.patch(f"https://api.cloudflare.com/client/v4/zones/{CF_ZONE_ID}/dns_records/{dns_id}", json = {
                 "content": host,
                 "type": "A",
-                "name": "intra.smashcloud.org",
+                "name": DOMAIN,
                 "proxied": False,
                 "comment": "Automatically added by xcontentmanagerd",
                 "ttl": 86400 # cache as much as possible in case internet die
