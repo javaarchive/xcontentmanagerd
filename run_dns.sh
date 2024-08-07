@@ -1,1 +1,1 @@
-sudo python dnschef.py
+sudo python dnschef.py --file dnschef.ini --interface 0.0.0.0 --nameservers 1.1.1.1
