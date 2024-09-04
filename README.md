@@ -1,5 +1,6 @@
 # xcontentmanagerd
-low power content server details for long trips with limited internet, it's like those airplane menus but cooler, runs on any computer capable of running a hotspot
+low power content server details for long trips with limited internet, it's like those airplane menus but cooler, runs on any computer capable of running a hotspot with our without limited internet access
+
 ![IMG_9501](https://github.com/user-attachments/assets/dc82d248-8eea-4349-ba1a-c0016b164b98)
 
 
